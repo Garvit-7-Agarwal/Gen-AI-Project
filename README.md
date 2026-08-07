@@ -61,19 +61,19 @@ An intelligent **Retrieval-Augmented Generation (RAG)** application built with *
 
 ## 📌 Future Improvements
 
-- 🧠 **Conversation Memory**  
-  Implement conversational memory so users can ask follow-up questions without repeating the complete context, making interactions more natural and continuous.
+### 🧠 Conversation Memory
+Implement conversational memory so users can ask follow-up questions without repeating the complete context, making interactions more natural and continuous.
 
-- 📄 **Optimized Document Processing**  
-  Detect duplicate PDFs and avoid unnecessary re-embedding. Incremental indexing can also be introduced so that only newly uploaded or modified documents are processed, reducing processing time and API usage.
+### 📄 Optimized Document Processing
+Detect duplicate PDFs and avoid unnecessary re-embedding. Incremental indexing can also be introduced so that only newly uploaded or modified documents are processed, reducing processing time and API usage.
 
-- 🖥️ **Advanced User Interface**  
-  Improve the interface with features such as document management, chat history, download options, clearer source citations, and real-time processing status.
+### 🖥️ Advanced User Interface
+Improve the interface with features such as document management, chat history, download options, clearer source citations, and real-time processing status.
 
-- 🛡️ **Enhanced Logging & Error Handling**  
-  Implement better logging and exception handling to simplify debugging and prevent application crashes caused by API, network, or document-processing errors.
+### 🛡️ Enhanced Logging & Error Handling
+Implement better logging and exception handling to simplify debugging and prevent application crashes caused by API, network, or document-processing errors.
 
-Overall, these improvements would make the system more **scalable, reliable, accurate, and suitable for real-world GenAI applications**.
+> Overall, these improvements would make the system more **scalable, reliable, accurate, and suitable for real-world GenAI applications**.
 
 ---
 
