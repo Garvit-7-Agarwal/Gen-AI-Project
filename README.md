@@ -79,9 +79,9 @@ Overall, these improvements would make the system more **scalable, reliable, acc
 
 ## 🎥 Demo
 
-Check out the project demo below to see the Agentic AI RAG application in action.
+Watch the complete demonstration of the **Agentic AI RAG application**:
 
-[▶️ Watch Demo Video](./demo.mp4)
+[▶️ Watch Demo Video on YouTube](https://youtu.be/eIG1IQ25aKM)
 
 ---
 
