@@ -81,7 +81,7 @@ Overall, these improvements would make the system more **scalable, reliable, acc
 
 Watch the complete demonstration of the **Agentic AI RAG application**:
 
-[▶️ Watch Demo Video on YouTube](https://youtu.be/eIG1IQ25aKM)
+[▶️ Watch Demo Video on YouTube](https://www.youtube.com/watch?v=nz1AvILj5ew)
 
 ---
 
