@@ -1,7 +1,13 @@
 import os
 from pathlib import Path
+import uuid
 
 import streamlit as st
+st.set_page_config(
+    page_title="Agentic AI RAG",
+    page_icon="📚"
+)
+
 from dotenv import load_dotenv
 
 from langchain_community.document_loaders import PyPDFLoader
@@ -32,17 +38,23 @@ answer = ""
 # ==========================
 # Create Data Folder and vector store directory 
 # ==========================
-DATA_DIR = Path("data")
-DATA_DIR.mkdir(exist_ok=True)
 
-VECTOR_DB = Path("vector_store")
-VECTOR_DB.mkdir(exist_ok=True)
+# Create a unique ID for this Streamlit session
+if "session_id" not in st.session_state:
+    st.session_state.session_id = str(uuid.uuid4())
+
+SESSION_ID = st.session_state.session_id
+
+DATA_DIR = Path("data") / SESSION_ID
+VECTOR_DB = Path("vector_store") / SESSION_ID
+
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+VECTOR_DB.mkdir(parents=True, exist_ok=True)
 
 
 # ==========================
 # Streamlit UI
 # ==========================
-st.set_page_config(page_title="Agentic AI RAG", page_icon="📚")
 
 if "web_search_approved" not in st.session_state: 
     st.session_state.web_search_approved = False 
@@ -121,7 +133,7 @@ existing_pdfs = sorted(DATA_DIR.glob("*.pdf"))
 
 if existing_pdfs:
     st.divider()
-    st.write("### PDFs Currently Available in `/data`")
+    st.write("### PDFs Currently Available in This Session")
 
     for pdf in existing_pdfs:
         st.write(f"📄 {pdf.name}")
