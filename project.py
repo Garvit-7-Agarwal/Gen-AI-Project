@@ -44,8 +44,8 @@ VECTOR_DB.mkdir(exist_ok=True)
 # ==========================
 st.set_page_config(page_title="Agentic AI RAG", page_icon="📚")
 
-if "web_search_approved" not in st.session_state: # st.session_state is like a dictionary that stores variables for a user's current session.
-    st.session_state.web_search_approved = False # Need to initialse it first otherwise we will get key error 
+if "web_search_approved" not in st.session_state: 
+    st.session_state.web_search_approved = False 
 
 st.title("📚 Agentic AI RAG")
 st.subheader("Step 1 : Document Ingestion")
@@ -57,7 +57,7 @@ uploaded_files = st.file_uploader(
 )
 
 
-if uploaded_files and st.button("Process Documents"): # i add this button because it reduces the reuse of api key like when we run this code then every time the embedding will be generated but if it was generated earlier then it is not neccesary to generate again so this button will help 
+if uploaded_files and st.button("Process Documents"):
 
     # ==========================
     # Save Uploaded PDFs
@@ -68,13 +68,12 @@ if uploaded_files and st.button("Process Documents"): # i add this button becaus
     for uploaded_file in uploaded_files:
 
         file_path = DATA_DIR / uploaded_file.name
-        # It does not create the file. It only creates the path where the file should be stored.
-        # Ex: data/Machine_Learning.pdf
+        
 
-        with open(file_path, "wb") as f:  # Here it create an empty file like an empty file is created in data folder and wb mean write in binary mode
-            f.write(uploaded_file.getbuffer()) # This returns the raw binary content of the uploaded file.
+        with open(file_path, "wb") as f:  
+            f.write(uploaded_file.getbuffer()) 
 
-        saved_files.append(uploaded_file.name) # saved files only contains the name of all the files 
+        saved_files.append(uploaded_file.name) 
 
     st.success(f"{len(saved_files)} PDF(s) uploaded successfully!")
 
@@ -110,33 +109,15 @@ if uploaded_files and st.button("Process Documents"): # i add this button becaus
     vector_store = FAISS.from_documents(
         documents=chunks,
         embedding=embeddings_model,
-    ) # Vector store both : the original text,its corresponding vector
+    ) 
 
-    vector_store.save_local(str(VECTOR_DB)) # str(VECTOR_DB) ensures you're passing a plain string path, which is compatible with libraries that expect strings. It's a common practice to avoid compatibility issues.
-    # Now vector store will contain two files 
-    # 1) index.faiss : Vector embeddings in a binary FAISS index
-    # 2) index.pkl : Original document chunks, metadata, and mapping information
-
+    vector_store.save_local(str(VECTOR_DB)) 
     st.success("FAISS Vector Store Created!")
 
 # ==========================
 # Display Existing PDFs
 # ==========================
 existing_pdfs = sorted(DATA_DIR.glob("*.pdf"))
-
-# DATA_DIR.glob("*.pdf") searches the DATA_DIR (i.e., the "data/" folder)
-# and returns all files whose extension is ".pdf".
-
-# Example:
-# existing_pdfs = [
-#     Path("data/AI.pdf"),
-#     Path("data/ML.pdf"),
-#     Path("data/Resume.pdf")
-# ]
-
-# The glob() method returns an iterator of Path objects.
-# When wrapped with sorted(), it becomes a list of Path objects
-# sorted alphabetically by their file names.
 
 if existing_pdfs:
     st.divider()
@@ -159,7 +140,7 @@ if (VECTOR_DB / "index.faiss").exists():
 
     retriever = vector_store.as_retriever(
         search_kwargs={"k": 4}
-    ) # means retrieve the 4 most relevant chunks.
+    ) 
 
 st.divider()
 
@@ -178,10 +159,8 @@ if query.strip():
 
 
     retrieved_docs = retriever.invoke(query)
-    # retrieved_docs is a list of Document objects.
     for doc in retrieved_docs:
         context += doc.page_content + "\n\n"
-    # context = "\n\n".join(doc.page_content for doc in retrieved_docs)
 
     prompt = ChatPromptTemplate.from_template("""
     You are a helpful AI assistant.
@@ -254,8 +233,6 @@ if st.session_state.web_search_approved:
     )
     st.write("Web Search Completed. ✅")
     response = model.invoke(formatted_prompt)
-
-# Step 6 
 
 if st.session_state.web_search_approved:
     final_answer = response.text().strip()
