@@ -7,4 +7,4 @@ langchain-text-splitters
 langchain-google-genai
 faiss-cpu
 pypdf
-duckduckgo-search
+ddgs
